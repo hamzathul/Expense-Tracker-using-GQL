@@ -1,4 +1,4 @@
-const trascationResolver = {
+const transactionResolver = {
   Query: {},
   Mutation: {},
 };
