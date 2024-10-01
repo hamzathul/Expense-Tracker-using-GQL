@@ -55,7 +55,7 @@ const userResolver = {
     logout: async (_, __, context) => {
       try {
         await context.logout();
-        req.session.destroy((err) => {
+        req.session.destroy((error) => {
           if (error) throw error;
         });
         res.clearCookie("connect.sid");
