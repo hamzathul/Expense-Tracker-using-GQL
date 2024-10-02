@@ -8,12 +8,11 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  gql,
 } from "@apollo/client";
 
 const client = new ApolloClient({
   //  UPDATE THE URI ON PRODUCTION
-  uri: "http://localhost:4000/qraphql", //The URL for our GraphQL server 
+  uri: "http://localhost:4000/graphql", //The URL for our GraphQL server 
   cache: new InMemoryCache(), //Apollo Client uses to cache query results after fetching them 
   credentials:"include" // This tells Apollo Client to send cookies along with every request to the server
 });
