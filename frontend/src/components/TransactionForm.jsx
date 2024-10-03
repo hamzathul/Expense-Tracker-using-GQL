@@ -4,7 +4,9 @@ import toast from 'react-hot-toast'
 
 
 const TransactionForm = () => {
-  const[createTransaction, {loading}]=useMutation(CREATE_TRANSACTION)
+  const [createTransaction, { loading }] = useMutation(CREATE_TRANSACTION, {
+    refetchQueries: ["GetTransactions"],
+  });
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -162,6 +164,7 @@ const TransactionForm = () => {
             className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-[11px] px-4 mb-3 leading-tight focus:outline-none
 						 focus:bg-white"
             placeholder="Select date"
+            required
           />
         </div>
       </div>
