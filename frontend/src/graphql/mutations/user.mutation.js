@@ -5,7 +5,7 @@ export const SIGN_UP = gql`
     signUp(input: $input) {
       _id
       name
-      usrname
+      username
     }
   }
 `;
