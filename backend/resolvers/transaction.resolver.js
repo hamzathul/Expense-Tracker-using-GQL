@@ -26,7 +26,7 @@ const transactionResolver = {
     //TODO => ADD CategoryStatistics query
   },
   Mutation: {
-    createTransaction: async (_, { input }) => {
+    createTransaction: async (_, { input },context) => {
       try {
         const newTransaction = new Transaction({
           ...input,
