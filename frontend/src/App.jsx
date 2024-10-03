@@ -12,26 +12,29 @@ import { Toaster } from "react-hot-toast";
 function App() {
   const { loading, data, error } = useQuery(GET_AUTHENTICATED_USER); // these 3 objects will get from apollo, easy!
   console.log("Authenticated User:", data);
+
+  if(loading) return null 
+
   return (
     <>
       {data?.authUser && <Header />}
       <Routes>
         <Route
           path="/"
-          element={data?.authUser ? <HomePage /> : <Navigate to="/login" />}
+          element={data.authUser ? <HomePage /> : <Navigate to="/login" />}
         />
         <Route
           path="/login"
-          element={!data?.authUser ? <LoginPage /> : <Navigate to="/" />}
+          element={!data.authUser ? <LoginPage /> : <Navigate to="/" />}
         />
         <Route
           path="/signup"
-          element={!data?.authUser ? <SignUpPage /> : <Navigate to="/" />}
+          element={!data.authUser ? <SignUpPage /> : <Navigate to="/" />}
         />
         <Route
           path="/transaction/:id"
           element={
-            data?.authUser ? <TransactionPage /> : <Navigate to="/login" />
+            data.authUser ? <TransactionPage /> : <Navigate to="/login" />
           }
         />
         <Route path="*" element={<NotFound />} />

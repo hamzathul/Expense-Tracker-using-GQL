@@ -14,7 +14,10 @@ const SignUpPage = () => {
     gender: "",
   });
 
-  const [signup, { loading, error }] = useMutation(SIGN_UP); // it returns array
+  // it returns array
+  const [signup, { loading, error }] = useMutation(SIGN_UP, {
+    refetchQueries: ["GetAuthenticatedUser"],
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
