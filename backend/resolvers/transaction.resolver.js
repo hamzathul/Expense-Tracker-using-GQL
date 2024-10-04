@@ -23,10 +23,38 @@ const transactionResolver = {
         throw new Error("Error getting transaction");
       }
     },
-    //TODO => ADD CategoryStatistics query
+    categoryStatistics: async (_, __, context) => {
+      if (!context.getUser()) throw new Error("Unauthorized");
+      const userId = context.getUser()._id;
+      const transactions = await Transaction.find({ userId });
+      const categoryMap ={}
+
+      // //
+      // const transactions = [
+      //   {category:"expense", amount:50}
+      //   {category:"expense", amount:75}
+      //   {category:"Investment", amount:30}
+      //   {category:"Investment", amount:40}
+      // ]
+      // //
+
+      transactions.forEach((transaction) => {
+        if (!categoryMap[transaction.category]) {
+          categoryMap[transaction.category] = 0;
+        }
+        categoryMap[transaction.category] += transaction.amount;
+        //categoryMap = {expense:125, investment:70}
+      });
+      //First objects are converted into array, then array map//
+      
+      return Object.entries(categoryMap).map(([category, totalAmount]) => ({
+        category,
+        totalAmount
+      }));
+    },
   },
   Mutation: {
-    createTransaction: async (_, { input },context) => {
+    createTransaction: async (_, { input }, context) => {
       try {
         const newTransaction = new Transaction({
           ...input,
