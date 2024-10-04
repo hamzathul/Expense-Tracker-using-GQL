@@ -10,8 +10,7 @@ import { GET_AUTHENTICATED_USER } from "./graphql/queries/user.query";
 import { Toaster } from "react-hot-toast";
 
 function App() {
-  const { loading, data, error } = useQuery(GET_AUTHENTICATED_USER); // these 3 objects will get from apollo, easy!
-  console.log("Authenticated User:", data);
+  const { loading, data } = useQuery(GET_AUTHENTICATED_USER); // these 3 objects will get from apollo, easy!
 
   if(loading) return null 
 
