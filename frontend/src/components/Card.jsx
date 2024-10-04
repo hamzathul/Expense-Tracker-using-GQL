@@ -23,9 +23,9 @@ const Card = ({ transaction }) => {
 
   const cardClass = categoryColorMap[category];
 
-  const [deleteTransaction, {loading}]=useMutation(DELETE_TRANSACTION,{
-    refetchQueries:['GetTransactions']
-  })
+  const [deleteTransaction, { loading }] = useMutation(DELETE_TRANSACTION, {
+    refetchQueries: ["GetTransactions", "GetTransactionStatistics"],
+  });
 
   // capitalize the first letter of the description
 
