@@ -1,4 +1,5 @@
 import Transaction from "../models/transaction.model.js";
+import User from "../models/user.model.js";
 
 const transactionResolver = {
   Query: {
@@ -27,7 +28,7 @@ const transactionResolver = {
       if (!context.getUser()) throw new Error("Unauthorized");
       const userId = context.getUser()._id;
       const transactions = await Transaction.find({ userId });
-      const categoryMap ={}
+      const categoryMap = {};
 
       // //
       // const transactions = [
@@ -46,10 +47,10 @@ const transactionResolver = {
         //categoryMap = {expense:125, investment:70}
       });
       //First objects are converted into array, then array map//
-      
+
       return Object.entries(categoryMap).map(([category, totalAmount]) => ({
         category,
-        totalAmount
+        totalAmount,
       }));
     },
   },
@@ -92,7 +93,18 @@ const transactionResolver = {
       }
     },
   },
-  // todo => add transaction/user relationship
+  Transaction: {
+    user: async (parent) => {
+      const userId = parent._id;
+      try {
+        const user = await User.findById(userId)
+        return user
+      } catch (error) {
+        console.log("Error getting User ", error);
+        throw new Error(error.message || "Error getting User");
+      }
+    },
+  },
 };
 
 export default transactionResolver;
