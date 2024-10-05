@@ -10,6 +10,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { LOGOUT } from "../graphql/mutations/user.mutation";
 import { GET_TRANSACTION_STATISTICS } from "../graphql/queries/transaction.query";
 import { useEffect, useState } from "react";
+import { GET_AUTHENTICATED_USER } from "../graphql/queries/user.query";
 
 // const chartData = {
 //   labels: ["Saving", "Expense", "Investment"],
@@ -39,6 +40,8 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const HomePage = () => {
     const { data } = useQuery(GET_TRANSACTION_STATISTICS);
+    const {data:authUserData} = useQuery(GET_AUTHENTICATED_USER)
+    console.log(authUserData)
 
   const [logout, { loading, client }] = useMutation(LOGOUT, {
     // client taken to clear cookie later
@@ -112,7 +115,7 @@ const HomePage = () => {
             Spend wisely, track wisely
           </p>
           <img
-            src={"https://tecdn.b-cdn.net/img/new/avatars/2.webp"}
+            src={authUserData?.authUser.profilePicture}
             className="w-11 h-11 rounded-full border cursor-pointer"
             alt="Avatar"
           />
