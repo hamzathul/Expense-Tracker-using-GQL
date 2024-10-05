@@ -91,7 +91,7 @@ const userResolver = {
   User:{
     transactions: async(parent)=>{    // here we use parent (the first argument), just for learning purpose
       try {
-        const transaction = await Transaction.find({userId:parent._id})
+        const transactions = await Transaction.find({userId:parent._id})
         return transactions
       } catch (error) {
         console.log("Error in user transaction resolver", error)
