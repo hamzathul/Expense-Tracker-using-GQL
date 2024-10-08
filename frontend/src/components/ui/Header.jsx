@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="mb-10">
       <h1 className="md:text-6xl text-4xl lg:text-6xl font-bold text-center  relative z-50 text-white pt-10">
-        Expense Tracker <Link to="/">GQL</Link>
+        Expense Tracker using <Link to="/">GQL</Link>
       </h1>
       <div className="relative mb-10 w-1/2 mx-auto hidden md:block">
         {/* Gradients */}
