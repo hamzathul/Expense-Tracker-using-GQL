@@ -15,7 +15,7 @@ const TransactionPage = () => {
   console.log("Transaction", data)
 
   const [updateTransaction, { loading: loadingUpdate }] = useMutation(
-    UPDATE_TRANSACTION,
+    UPDATE_TRANSACTION, // refetchquery issue is facing everyone. solution is like this query.
     { refetchQueries: [{query:GET_TRANSACTION_STATISTICS}] }
   );
 
