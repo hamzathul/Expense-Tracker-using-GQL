@@ -2,6 +2,7 @@ import express from "express";
 import http from "http";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
 
 import passport from "passport";
 import session from "express-session";
@@ -19,8 +20,11 @@ import mergedTypeDefs from "./typeDefs/index.js";
 import { connectDB } from "./db/connectDB.js";
 import { configurePassport } from "./passport/passport.config.js";
 
+
 dotenv.config();
 configurePassport()
+
+const __dirname = path.resolve() // root of the application
 
 const app = express();
 
@@ -72,6 +76,12 @@ app.use(
     context: async ({ req, res }) => buildContext({ req, res }),
   })
 );
+
+// 'npm run build' will build your frontend app
+app.use(express.static(path.join(__dirname, "frontend/dist")))// make the folder static assets
+app.get("*", (req, res)=>{
+  res.sendFile(path.join(__dirname, "frontend/dist", "index.html"))
+})
 
 // Modified server startup
 await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));

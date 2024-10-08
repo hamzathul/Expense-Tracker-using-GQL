@@ -4,17 +4,16 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
 import GridBackground from "./components/ui/GridBackground";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 const client = new ApolloClient({
   //  UPDATE THE URI ON PRODUCTION
-  uri: "http://localhost:4000/graphql", //The URL for our GraphQL server 
-  cache: new InMemoryCache(), //Apollo Client uses to cache query results after fetching them 
-  credentials:"include" // This tells Apollo Client to send cookies along with every request to the server
+  uri:
+    import.meta.env.VITE_NODE_ENV === "development"
+      ? "http://localhost:4000/graphql"
+      : "/graphql", //The URL for our GraphQL server
+  cache: new InMemoryCache(), //Apollo Client uses to cache query results after fetching them
+  credentials: "include", // This tells Apollo Client to send cookies along with every request to the server
 });
 
 createRoot(document.getElementById("root")).render(
